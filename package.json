@@ -1,0 +1,15 @@
+{
+  "name": "odd-frog-markdown-viewer",
+  "version": "1.0.0",
+  "description": "Lightweight markdown sharing tool",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "marked": "^12.0.2",
+    "nanoid": "^3.3.7",
+    "redis": "^4.6.13"
+  }
+}
