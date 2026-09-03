@@ -15,9 +15,9 @@ redisClient.on('error', (err) => console.error('Redis Client Error:', err));
 (async () => {
   try {
     await redisClient.connect();
-    console.log(' Connected to Redis');
+    console.log('Connected to Redis');
   } catch (err) {
-    console.error(' Could not connect to Redis:', err);
+    console.error('Could not connect to Redis:', err);
   }
 })();
 
@@ -130,13 +130,13 @@ const layout = (title, bodyContent, isMarkdown = false) => `
 </head>
 <body>
   <div class="wrapper">
-    <div class="card \${isMarkdown ? 'markdown-body' : ''}">
-      \${bodyContent}
+    <div class="card ${isMarkdown ? 'markdown-body' : ''}">
+      ${bodyContent}
     </div>
   </div>
 </body>
 </html>
-\`;
+`;
 
 app.get('/', (req, res) => {
   const content = `
@@ -158,15 +158,15 @@ app.post('/publish', async (req, res) => {
     const docId = nanoid(8);
     await redisClient.set(docId, rawMarkdown);
 
-    const fullUrl = \`\${req.protocol}://\${req.get('host')}/v/\${docId}\`;
+    const fullUrl = `${req.protocol}://${req.get('host')}/v/${docId}`;
     const content = `
       <div class="header">
         <h1>🐸 Document Published!</h1>
       </div>
       <p>Your document is stored and ready to share:</p>
       <div class="url-display">
-        <a id="share-link" href="\${fullUrl}" target="_blank">\${fullUrl}</a>
-        <button class="btn-secondary" onclick="navigator.clipboard.writeText('\${fullUrl}'); this.innerText = 'Copied!';">Copy Link</button>
+        <a id="share-link" href="${fullUrl}" target="_blank">${fullUrl}</a>
+        <button class="btn-secondary" onclick="navigator.clipboard.writeText('${fullUrl}'); this.innerText = 'Copied!';">Copy Link</button>
       </div>
       <a href="/" style="color: #58a6ff; text-decoration: none;">← Create another document</a>
     `;
@@ -195,5 +195,5 @@ app.get('/v/:id', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(\`🐸 Odd Frog running on port \${PORT}\`);
+  console.log(`🐸 Odd Frog running on port ${PORT}`);
 });
